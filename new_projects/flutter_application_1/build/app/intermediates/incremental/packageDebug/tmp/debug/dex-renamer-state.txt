@@ -1,0 +1,4 @@
+#Tue Jul 19 08:36:51 NPT 2022
+base.0=/home/amrit/yubraj/TECH_AND_IT/flutter_projects/Flutter_Projects/new_projects/flutter_application_1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
