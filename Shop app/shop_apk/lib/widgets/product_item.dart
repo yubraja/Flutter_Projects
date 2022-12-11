@@ -14,7 +14,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
     final cart = Provider.of<Cart>(context);
-    final authData = Provider.of<Auth>(context,listen: false);
+    final authData = Provider.of<Auth>(context, listen: false);
     return ClipRRect(
       child: GridTile(
         // ignore: sort_child_properties_last
@@ -23,9 +23,12 @@ class ProductItem extends StatelessWidget {
             Navigator.of(context).pushNamed(ProductDetailScreen.routeName,
                 arguments: product.id);
           }),
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
+          child:Hero(
+            tag: product.id,
+            child: FadeInImage(placeholder: AssetImage('assets/images/tshirt.png'),image:NetworkImage(
+                  product.imageUrl,
+                  
+                ),fit: BoxFit.cover,),
           ),
         ),
         footer: GridTileBar(
@@ -34,8 +37,9 @@ class ProductItem extends StatelessWidget {
                 product.isFavorite ? Icons.favorite : Icons.favorite_border),
             color: Theme.of(context).accentColor,
             onPressed: () async {
-              try {
-                await product.toggleFavoriteStatus(authData.token );
+              try { 
+                await product.toggleFavoriteStatus(
+                    authData.token, authData.userId);
               } catch (error) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(error.toString())));

@@ -41,7 +41,8 @@ class Products with ChangeNotifier {
     //   ),
   ];
   final String? authToken;
-  Products(this.authToken,this._items );
+  final String? userId;
+  Products(this.authToken, this.userId, this._items);
   // ];
   // var _showFavoritesOnly = false;
 
@@ -57,22 +58,34 @@ class Products with ChangeNotifier {
     return _items.where((prod) => prod.isFavorite).toList();
   }
 
-  Future<void> fetchAndSetProducts() async {
-    final url = Uri.parse(
-        'https://flutter-update-3a692-default-rtdb.firebaseio.com/products.json?auth=$authToken');
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
+    var url = Uri.parse(
+        'https://flutter-update-3a692-default-rtdb.firebaseio.com/products.json?auth=$authToken &$filterString');
     try {
       final response = await http.get(url);
 
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
+      url = Uri.parse(
+          'https://flutter-update-3a692-default-rtdb.firebaseio.com/userFavorites/${userId}.json?auth=$authToken');
+
+      final favoriteResponse = await http.get(url);
+      final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
-            id: prodId,
-            title: prodData['title'],
-            description: prodData['description'],
-            price: prodData['price'],
-            imageUrl: prodData['imageUrl'],
-            isFavorite: prodData['isFavorite']));
+          id: prodId,
+          title: prodData['title'],
+          description: prodData['description'],
+          price: prodData['price'],
+          isFavorite:
+              favoriteData == null ? false : favoriteData[prodId] ?? false,
+          imageUrl: prodData['imageUrl'],
+        ));
       });
       _items = loadedProducts;
       notifyListeners();
@@ -95,6 +108,7 @@ class Products with ChangeNotifier {
             "imageUrl": product.imageUrl,
             "price": product.price,
             "isFavorite": product.isFavorite,
+            'creatorId': userId,
           },
         ),
       );

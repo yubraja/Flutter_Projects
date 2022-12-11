@@ -11,12 +11,12 @@ class UserProductScreen extends StatelessWidget {
   const UserProductScreen({super.key});
 
   Future<void> _refreshProduct(BuildContext context) async {
-    await Provider.of<Products>(context,listen: false).fetchAndSetProducts();
+    await Provider.of<Products>(context,listen: false).fetchAndSetProducts(true);
   }
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context);
+    // final productsData = Provider.of<Products>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Products"),
@@ -29,23 +29,29 @@ class UserProductScreen extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: RefreshIndicator(
-        onRefresh: () =>
-          _refreshProduct(context)
-        ,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ListView.builder(
-            itemBuilder: ((context, index) => Column(
-                  children: [
-                    UserProductItem(
-                        id: productsData.items[index].id,
-                        title: productsData.items[index].title,
-                        imageUrl: productsData.items[index].imageUrl),
-                    Divider()
-                  ],
-                )),
-            itemCount: productsData.items.length,
+      body: FutureBuilder(
+        future: _refreshProduct(context),
+
+        builder: (context, snapshot) =>snapshot.connectionState==ConnectionState.waiting?Center(child: CircularProgressIndicator(),): RefreshIndicator(
+          onRefresh: () =>
+            _refreshProduct(context)
+          ,
+          child: Consumer<Products>(
+            builder: (context, productsData, child) => Padding(
+              padding: const EdgeInsets.all(8),
+              child: ListView.builder(
+                itemBuilder: ((context, index) => Column(
+                      children: [
+                        UserProductItem(
+                            id: productsData.items[index].id,
+                            title: productsData.items[index].title,
+                            imageUrl: productsData.items[index].imageUrl),
+                        Divider()
+                      ],
+                    )),
+                itemCount: productsData.items.length,
+              ),
+            ),
           ),
         ),
       ),

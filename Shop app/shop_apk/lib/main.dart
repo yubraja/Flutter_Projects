@@ -11,6 +11,8 @@ import './screens/user_product_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth-screen.dart';
 import './providers/auth.dart';
+import './screens/splash_screen.dart';
+import './helpers/custome_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,13 +28,18 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: ((context) => Auth())),
         ChangeNotifierProxyProvider<Auth, Products>(
-          create: (context) => Products('', []),
-          update: ((context, auth, previousProducts) => Products(auth.token,
+          create: (context) => Products('', '', []),
+          update: ((context, auth, previousProducts) => Products(
+              auth.token,
+              auth.userId,
               previousProducts == null ? [] : previousProducts.items)),
         ), //here value provides auth object since it is just above this widget
         ChangeNotifierProvider(create: ((context) => Cart())),
-        ChangeNotifierProxyProvider<Auth,Orders>(create: (context) => Orders('',[]),
-        update: (context, auth, previousOrders) => Orders(auth.token, previousOrders==null?[]:previousOrders.orders),),
+        ChangeNotifierProxyProvider<Auth, Orders>(
+          create: (context) => Orders('', '', []),
+          update: (context, auth, previousOrders) => Orders(auth.token,
+              auth.userId, previousOrders == null ? [] : previousOrders.orders),
+        ),
       ],
       child: Consumer<Auth>(
           builder: ((ctx, auth, _) => MaterialApp(
@@ -41,11 +48,19 @@ class MyApp extends StatelessWidget {
                   primarySwatch: Colors.purple,
                   accentColor: Colors.deepOrange,
                   fontFamily: 'Lato',
+                  pageTransitionsTheme: PageTransitionsTheme(builders: {TargetPlatform.android:CustomPageTransitionBuilder(),TargetPlatform.iOS:CustomPageTransitionBuilder()})
                 ),
-                home:
-                 auth.isAuth
+                home: auth.isAuth 
                     ? const ProductOverviewScreen()
-                    : const AuthScreen(),
+                    // : FutureBuilder(
+                    //     future: auth.tryAutoLogin(),
+                    //     builder: (context, authResultSnapshot) =>
+                    //         authResultSnapshot.connectionState ==
+                    //                 ConnectionState.waiting
+                    //             ? SplashScreen()
+                    //             :
+                    : AuthScreen(),
+                      
                 debugShowCheckedModeBanner: false,
                 routes: {
                   ProductDetailScreen.routeName: (context) =>
