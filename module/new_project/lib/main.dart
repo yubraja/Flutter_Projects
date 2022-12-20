@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
       value: GreatPlaces(),
       child: MaterialApp(
         title: 'Great Places',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
          
           primarySwatch: Colors.indigo,
           secondaryHeaderColor:  Colors.amber,
-          buttonColor: Colors.amber
         ),
         home:PlacesListScreen(), 
         routes:{
