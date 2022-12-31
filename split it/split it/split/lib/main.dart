@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import './pages/third_page.dart';
+import 'package:provider/provider.dart';
+import './Providers/Data.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Data()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,8 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color.fromRGBO(189, 158, 255, 1),//
+        primaryColor: Color.fromRGBO(189, 158, 255, 1),
       ),
       home: ThirdPage(),
     );

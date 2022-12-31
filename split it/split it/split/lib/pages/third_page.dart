@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
-import 'package:split/widgets/associative_payments.dart';
+import '../widgets/associative_payments.dart';
+import '../widgets/button_display.dart';
+
 
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
@@ -10,15 +9,15 @@ class ThirdPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Main'),
-        backgroundColor: Theme.of(context).primaryColor,
-        centerTitle: true,
-      ),
+     resizeToAvoidBottomInset: false,
       body: Column(
         children: [
 
-          AssociativePayments(),
+          AssociativePayments(typePaid:'COLLABORATIVE PAYMENTS'),
+          AssociativePayments(typePaid:'INDIVIDUAL PAYMENTS'),
+          ButtonDisplay(),
+
+
         ],
       ),
     );

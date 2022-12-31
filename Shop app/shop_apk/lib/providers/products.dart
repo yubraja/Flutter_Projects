@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/http_exception.dart';
 
-class Products with ChangeNotifier {
+class Products with ChangeNotifier {		
   List<Product> _items = [
     //   Product(
     //     id: 'p1',
