@@ -16,7 +16,7 @@ class InputSection extends StatelessWidget {
       price: double.parse(_priceController.text),
       date: DateFormat('dd MMM').format(DateTime.now()),
       name: name,
-      payementMethod: typePaid,
+      paymentMethod: typePaid,
     );
   }
 

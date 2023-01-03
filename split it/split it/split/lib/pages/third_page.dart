@@ -17,6 +17,11 @@ class ThirdPage extends StatelessWidget {
           AssociativePayments(typePaid:'INDIVIDUAL PAYMENTS'),
           ButtonDisplay(),
 
+          
+
+
+
+
 
         ],
       ),

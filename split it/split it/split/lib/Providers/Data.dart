@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './item_details.dart';
 import 'package:intl/intl.dart';
+import '../helpers/db_helpers.dart';
 
 class Data with ChangeNotifier {
   String name1 = 'gaurab';
@@ -30,25 +31,49 @@ class Data with ChangeNotifier {
     double? price,
     String? date,
     String? name,
-    String? payementMethod,
+    String? paymentMethod,
+    String? id,
   }) {
     final newItem = ItemDetails(
       item: item!,
       price: price!,
       date: date!,
       name: name!,
-      payementMethod: payementMethod!,
+      paymentMethod: paymentMethod!,
+      id: DateTime.now().toIso8601String(),
     );
 
     _items.add(newItem);
     notifyListeners();
+
+    DbHelper.insert(
+      'SplitIt',
+      {
+        'item': newItem.item,
+        'price': newItem.price,
+        'date': newItem.date,
+        'name': newItem.name,
+        'paymentMethod': newItem.paymentMethod,
+        'id': newItem.id as String,
+      },
+    );
   }
 
+  Future<void> fetchAndSetData() async {
+    final dataList = await DbHelper.getData('SplitIt');
 
-  void clearAll()
-  {
+    _items = dataList
+        .map((item) => ItemDetails(
+              item: item['item'],
+              price: item['price'],
+              date: item['date'],
+              name: item['name'],
+              paymentMethod: item['paymentMethod'],
+              id: item['id'],
+            ))
+        .toList();
 
-
+    notifyListeners();
   }
 
   void calculateTotal() {
@@ -62,7 +87,7 @@ class Data with ChangeNotifier {
 
     _firstCollaborative = _items
         .where((element) => (element.name == name1 &&
-            element.payementMethod == "COLLABORATIVE PAYMENTS"))
+            element.paymentMethod == "COLLABORATIVE PAYMENTS"))
         .toList();
 //adding value of one person
     for (var element in _firstCollaborative) {
@@ -73,7 +98,7 @@ class Data with ChangeNotifier {
 
     _secondCollaborative = _items
         .where((element) => (element.name == name2 &&
-            element.payementMethod == "COLLABORATIVE PAYMENTS"))
+            element.paymentMethod == "COLLABORATIVE PAYMENTS"))
         .toList();
     for (var element in _secondCollaborative) {
       collaborativeSecond = collaborativeSecond + element.price;
@@ -83,7 +108,7 @@ class Data with ChangeNotifier {
 
     _firstIndividual = _items
         .where((element) => (element.name == name1 &&
-            element.payementMethod == "INDIVIDUAL PAYMENTS"))
+            element.paymentMethod == "INDIVIDUAL PAYMENTS"))
         .toList();
 
     for (var element in _firstIndividual) {
@@ -93,7 +118,7 @@ class Data with ChangeNotifier {
 //same
     _secondIndividual = _items
         .where((element) => (element.name == name2 &&
-            element.payementMethod == "INDIVIDUAL PAYMENTS"))
+            element.paymentMethod == "INDIVIDUAL PAYMENTS"))
         .toList();
 
     for (var element in _secondIndividual) {
@@ -103,12 +128,25 @@ class Data with ChangeNotifier {
     total = (collaborativeFirst - collaborativeSecond) / 2 +
         individualFirst -
         individualSecond;
-    
+
 //calc
   }
 
   double? get finalResult {
-    print(total);
-    return total;
+    return total.roundToDouble();
+  }
+
+  Future<void> clearAll() async {
+    _items = [];
+
+    await DbHelper.deleteAll('SplitIt');
+    notifyListeners();
+  }
+
+  Future<void> clearOne(String id) async {
+    _items.removeWhere((element) => element.id == id);
+    notifyListeners();
+
+    await DbHelper.deleteOne('SplitIt', id);
   }
 }

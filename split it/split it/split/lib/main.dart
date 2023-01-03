@@ -24,8 +24,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color.fromRGBO(189, 158, 255, 1),
-      ),
+          primaryColor: Color.fromRGBO(189, 158, 255, 1),
+          buttonTheme: ButtonThemeData(
+            buttonColor: Color.fromRGBO(36, 1, 92, 1),
+          )),
       home: ThirdPage(),
     );
   }

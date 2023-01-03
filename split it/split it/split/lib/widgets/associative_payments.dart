@@ -11,7 +11,6 @@ class AssociativePayments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print(size);
     return Padding(
       padding: EdgeInsets.only(
         top: typePaid == 'COLLABORATIVE PAYMENTS' ? size.height*0.11209 : size.height*0.01868227,

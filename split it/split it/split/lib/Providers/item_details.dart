@@ -5,13 +5,15 @@ class ItemDetails {
   double price;
   String date;
   String name;
-  String payementMethod;
+  String paymentMethod;
+  String? id;
 
-  ItemDetails(
-      {required this.item,
-      required this.price,
-      required this.date,
-      required this.name,
-      required this.payementMethod,
-      });
+  ItemDetails({
+    required this.item,
+    required this.price,
+    required this.date,
+    required this.name,
+    required this.paymentMethod,
+     this.id
+  });
 }
