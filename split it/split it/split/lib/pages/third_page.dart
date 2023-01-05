@@ -10,6 +10,7 @@ class ThirdPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
      resizeToAvoidBottomInset: false,
+     backgroundColor: Color.fromRGBO(189, 158, 255, 1),
       body: Column(
         children: [
 

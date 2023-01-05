@@ -4,9 +4,8 @@ import 'package:intl/intl.dart';
 import '../helpers/db_helpers.dart';
 
 class Data with ChangeNotifier {
-  String name1 = 'gaurab';
-  String name2 = 'yubraj';
-
+  late String _name1;
+  late String _name2;
   List<ItemDetails> _items = [];
 
   List<ItemDetails> get data {
@@ -86,7 +85,7 @@ class Data with ChangeNotifier {
 //another iterable is created for matching condition
 
     _firstCollaborative = _items
-        .where((element) => (element.name == name1 &&
+        .where((element) => (element.name == _name1 &&
             element.paymentMethod == "COLLABORATIVE PAYMENTS"))
         .toList();
 //adding value of one person
@@ -97,7 +96,7 @@ class Data with ChangeNotifier {
     //same
 
     _secondCollaborative = _items
-        .where((element) => (element.name == name2 &&
+        .where((element) => (element.name == _name2 &&
             element.paymentMethod == "COLLABORATIVE PAYMENTS"))
         .toList();
     for (var element in _secondCollaborative) {
@@ -107,7 +106,7 @@ class Data with ChangeNotifier {
     //same
 
     _firstIndividual = _items
-        .where((element) => (element.name == name1 &&
+        .where((element) => (element.name == _name1 &&
             element.paymentMethod == "INDIVIDUAL PAYMENTS"))
         .toList();
 
@@ -117,7 +116,7 @@ class Data with ChangeNotifier {
 
 //same
     _secondIndividual = _items
-        .where((element) => (element.name == name2 &&
+        .where((element) => (element.name == _name2 &&
             element.paymentMethod == "INDIVIDUAL PAYMENTS"))
         .toList();
 
@@ -145,8 +144,24 @@ class Data with ChangeNotifier {
 
   Future<void> clearOne(String id) async {
     _items.removeWhere((element) => element.id == id);
-    notifyListeners();
 
     await DbHelper.deleteOne('SplitIt', id);
+    notifyListeners();
+  }
+
+  void nameAdder(String fname, String sname) {
+    _name1 = fname;
+    _name2 = sname;
+
+    print(_name1);
+    print(_name2);
+  }
+
+  String get firstName {
+    return _name1;
+  }
+
+  String get secondName {
+    return _name2;
   }
 }

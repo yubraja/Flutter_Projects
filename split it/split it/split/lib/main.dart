@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './pages/third_page.dart';
 import 'package:provider/provider.dart';
 import './Providers/Data.dart';
+import './pages/second_page.dart';
 
 void main() {
   runApp(
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
           buttonTheme: ButtonThemeData(
             buttonColor: Color.fromRGBO(36, 1, 92, 1),
           )),
-      home: ThirdPage(),
+      home: SecondPage(),
+      routes: {
+        '/thirdPage': (context) => ThirdPage(),
+      },
     );
   }
 }

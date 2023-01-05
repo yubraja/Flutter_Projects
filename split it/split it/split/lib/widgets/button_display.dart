@@ -11,13 +11,12 @@ class ButtonDisplay extends StatefulWidget {
 }
 
 class _ButtonDisplayState extends State<ButtonDisplay> {
-  String name1 = 'gaurab';
-  String name2 = 'yubraj';
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     Data value = Provider.of<Data>(context, listen: true);
+    final name1 = value.firstName;
+    final name2 = value.secondName;
 
     void calculateFunction() {
       setState(() {

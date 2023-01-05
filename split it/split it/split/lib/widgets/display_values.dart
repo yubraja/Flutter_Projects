@@ -5,11 +5,12 @@ import 'package:provider/provider.dart';
 class DisplayValues extends StatelessWidget {
   String typePaid;
   DisplayValues({required this.typePaid});
-  String name1 = 'gaurab';
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    String name1 = Provider.of<Data>(context,listen:false).firstName;
+
 
     return FutureBuilder(
       future: Provider.of<Data>(context, listen: false).fetchAndSetData(),
@@ -63,7 +64,7 @@ class DisplayValues extends StatelessWidget {
                                               // delete item here
 
                                               data.clearOne(
-                                                  data.data[index].date);
+                                                  data.data[index].id! );
 
                                               Navigator.of(context).pop();
                                             },
