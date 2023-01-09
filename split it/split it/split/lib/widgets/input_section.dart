@@ -62,9 +62,11 @@ class InputSection extends StatelessWidget {
                 ),
                 child: TextField(
                   controller: _priceController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'PRICE',
+                    
                   ),
                   textAlignVertical: TextAlignVertical.center,
                   textAlign: TextAlign.center,

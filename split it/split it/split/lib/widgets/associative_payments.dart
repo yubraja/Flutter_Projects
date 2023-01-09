@@ -12,7 +12,7 @@ class AssociativePayments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final value = Provider.of<Data>(context);
+    final value = Provider.of<Data>(context,listen: false);
     final name1 = value.firstName;
     final name2 = value.secondName;
     return Padding(

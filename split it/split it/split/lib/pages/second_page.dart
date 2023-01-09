@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/addinformation.dart';
 
 class SecondPage extends StatelessWidget {
+  static final routeName = '/secondPage';
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

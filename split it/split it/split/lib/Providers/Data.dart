@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import '../helpers/db_helpers.dart';
 
 class Data with ChangeNotifier {
-  late String _name1;
-  late String _name2;
+  String _name1 = 'gaurab';
+  String _name2 = 'yubraj';
   List<ItemDetails> _items = [];
 
   List<ItemDetails> get data {
