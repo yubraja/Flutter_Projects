@@ -43,37 +43,37 @@ class DisplayValues extends StatelessWidget {
                                     name1 &&
                                 data.data[index].paymentMethod == typePaid
                             ? GestureDetector(
-                                onLongPress: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Delete item'),
-                                        content: Text(
-                                            'Are you sure you want to delete this item?'),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('Cancel'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: Text('Delete'),
-                                            onPressed: () {
-                                              // delete item here
+                                  onLongPress: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text('Delete item'),
+                                          content: Text(
+                                              'Are you sure you want to delete this item?'),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Cancel'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            TextButton(
+                                              child: Text('Delete'),
+                                              onPressed: () {
+                                                // delete item here
 
-                                              data.clearOne(
-                                                  data.data[index].id! );
+                                                data.clearOne(
+                                                    data.data[index].id! );
 
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
                                 child: Container(
                                   child: Row(
                                     children: [
@@ -88,18 +88,53 @@ class DisplayValues extends StatelessWidget {
                                 ),
                               )
                             : (data.data[index].paymentMethod == typePaid)
-                                ? Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text('${data.data[index].date}    '),
-                                      Text(
-                                        '${data.data[index].item}-${data.data[index].price}   ',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  )
+                                ? GestureDetector(
+                                  onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Text('Delete item'),
+                                            content: Text(
+                                                'Are you sure you want to delete this item?'),
+                                            actions: [
+                                              TextButton(
+                                                child: Text('Cancel'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text('Delete'),
+                                                onPressed: () {
+                                                  // delete item here
+
+                                                  data.clearOne(
+                                                      data.data[index].id!);
+
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  child: Container(
+                                    child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text('${data.data[index].date}    '),
+                                          Text(
+                                            '${data.data[index].item}-${data.data[index].price}   ',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                  ),
+                                )
                                 : Container(),
                         itemCount: data.data.length,
                       ),

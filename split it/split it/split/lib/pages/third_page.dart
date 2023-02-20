@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/associative_payments.dart';
 import '../widgets/button_display.dart';
+import '../widgets/headertext.dart';
 
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
@@ -16,6 +17,7 @@ class ThirdPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            HeaderText(),
             AssociativePayments(typePaid: 'COLLABORATIVE PAYMENTS'),
             AssociativePayments(typePaid: 'INDIVIDUAL PAYMENTS'),
             ButtonDisplay(),

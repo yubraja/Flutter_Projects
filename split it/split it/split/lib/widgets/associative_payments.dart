@@ -18,7 +18,7 @@ class AssociativePayments extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: typePaid == 'COLLABORATIVE PAYMENTS'
-            ? size.height * 0.11209
+            ? size.height * 0.01868227
             : size.height * 0.01868227,
         left: size.width * 0.063661828,
       ),

@@ -57,8 +57,8 @@ class _ButtonDisplayState extends State<ButtonDisplay> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Delete item'),
-                    content: Text('Are you sure you want to delete this item?'),
+                    title: Text('Clear All'),
+                    content: Text('Do you want to clear all?'),
                     actions: [
                       TextButton(
                         child: Text('Cancel'),

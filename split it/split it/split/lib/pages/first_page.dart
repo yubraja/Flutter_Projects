@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import '../pages/second_page.dart';
+import '../pages/third_page.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
@@ -15,7 +15,7 @@ class _FirstPageState extends State<FirstPage> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed(SecondPage.routeName);
+      Navigator.of(context).pushReplacementNamed(ThirdPage.routeName);
     });
     super.initState();
   }

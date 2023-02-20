@@ -30,49 +30,51 @@ class InputSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 3),
-                width: size.width * 0.208810797,
-                height: size.height * 0.037364553,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 238, 238, 238)),
-                  color: Color.fromARGB(255, 211, 210, 210),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: TextField(
-                  controller: _itemController,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'ITEM',
+          Form(
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 3),
+                  width: size.width * 0.208810797,
+                  height: size.height * 0.037364553,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color.fromARGB(255, 238, 238, 238)),
+                    color: Color.fromARGB(255, 211, 210, 210),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
-                  textAlignVertical: TextAlignVertical.center,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 3),
-                width: size.width * 0.208810797,
-                height: size.height * 0.037364553,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 238, 238, 238)),
-                  color: Color.fromARGB(255, 211, 210, 210),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: TextField(
-                  controller: _priceController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'PRICE',
-                    
+                  child: TextField(
+                    controller: _itemController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'ITEM',
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    textAlign: TextAlign.center,
                   ),
-                  textAlignVertical: TextAlignVertical.center,
-                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                Container(
+                  margin: EdgeInsets.only(left: 3),
+                  width: size.width * 0.208810797,
+                  height: size.height * 0.037364553,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color.fromARGB(255, 238, 238, 238)),
+                    color: Color.fromARGB(255, 211, 210, 210),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: TextField(
+                    controller: _priceController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'PRICE',
+                      
+                      
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             width: 1,
